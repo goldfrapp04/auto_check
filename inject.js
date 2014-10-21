@@ -4,18 +4,24 @@ var injected = injected || (function(){
   // we can use from our event script.
   var methods = {};
 
-  // This method will eventually return
-  // background colors from the current page.
   methods.autoCheck = function(){
-    // var nodes = document.querySelectorAll('*');
-    // return nodes.length;
-    var inputs = document.getElementsByTagName('input')
+    // var inputs = document.getElementsByTagName('input')
     var s = ''
+    // for (var i = 0; i < inputs.length; i++)
+    //   if (inputs[i].type && inputs[i].type === 'checkbox')
+    //     // s += inputs[i].value + '\n'
+    //     inputs[i].checked = true
+    var inputs = document.getElementsByTagName('input')
+    var tests = []
     for (var i = 0; i < inputs.length; i++)
-      if (inputs[i].type && inputs[i].type === 'checkbox')
-        s += inputs[i].value + '\n'
-    // alert(inputs[20].value)
-    alert(s)
+      if (inputs[i].type && inputs[i].type === 'checkbox') 
+        tests.push(inputs[i])
+    
+    var lastCheckedTest = getLastCheckedTest(tests)
+    for (var i = lastCheckedTest - 1; i >= 0; i--)
+      tests[i].checked = false
+    for (var i = 0; i < 10 && lastCheckedTest + i < tests.length; i++)
+      tests[lastCheckedTest + i].checked = true
   };
 
   // This tells the script to listen for
@@ -34,3 +40,8 @@ var injected = injected || (function(){
 
   return true;
 })();
+
+function getLastCheckedTest(tests) {
+  for (var i = tests.length - 1; i > 0 && tests[i].checked === false; i--);
+  return i
+}

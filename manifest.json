@@ -6,7 +6,7 @@
   "description": "Auto check!",
 
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "download.PNG"
   },
 
   "background": {
@@ -14,5 +14,5 @@
     "persistent": false
   },
   
-  "permissions": ["<all_urls>"]
+  "permissions": ["http://boston.lti.cs.cmu.edu/classes/11-642/HW/*"]
 }
