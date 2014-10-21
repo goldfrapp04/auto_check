@@ -7,8 +7,15 @@ var injected = injected || (function(){
   // This method will eventually return
   // background colors from the current page.
   methods.autoCheck = function(){
-    var nodes = document.querySelectorAll('*');
-    return nodes.length;
+    // var nodes = document.querySelectorAll('*');
+    // return nodes.length;
+    var inputs = document.getElementsByTagName('input')
+    var s = ''
+    for (var i = 0; i < inputs.length; i++)
+      if (inputs[i].type && inputs[i].type === 'checkbox')
+        s += inputs[i].value + '\n'
+    // alert(inputs[20].value)
+    alert(s)
   };
 
   // This tells the script to listen for

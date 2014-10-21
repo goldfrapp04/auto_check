@@ -6,7 +6,7 @@ function injectedMethod (tab, method, callback) {
 
 function autoCheck (tab) {
   injectedMethod(tab, 'autoCheck', function (response) {
-    alert('Elements in tab: ' + response.data);
+    // alert('Elements in tab: ' + response.data);
     return true;
   });
 }
