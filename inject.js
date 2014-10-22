@@ -1,3 +1,4 @@
+
 var injected = injected || (function(){
 
   // An object that will contain the "methods"
@@ -5,23 +6,24 @@ var injected = injected || (function(){
   var methods = {};
 
   methods.autoCheck = function(){
-    // var inputs = document.getElementsByTagName('input')
-    var s = ''
-    // for (var i = 0; i < inputs.length; i++)
-    //   if (inputs[i].type && inputs[i].type === 'checkbox')
-    //     // s += inputs[i].value + '\n'
-    //     inputs[i].checked = true
     var inputs = document.getElementsByTagName('input')
     var tests = []
+    var checkedCount = 0
+
     for (var i = 0; i < inputs.length; i++)
-      if (inputs[i].type && inputs[i].type === 'checkbox') 
+      if (inputs[i].type && inputs[i].type === 'checkbox') {
         tests.push(inputs[i])
-    
-    var lastCheckedTest = getLastCheckedTest(tests)
-    for (var i = lastCheckedTest - 1; i >= 0; i--)
-      tests[i].checked = false
-    for (var i = 0; i < 10 && lastCheckedTest + i < tests.length; i++)
-      tests[lastCheckedTest + i].checked = true
+        if (inputs[i].checked)
+          checkedCount++
+      }
+
+    if (checkedCount === 1) {
+      var checkedTest = getCheckedTest(tests)
+      for (var i = 0; i < 10 && checkedTest + i < tests.length; i++)
+        tests[checkedTest + i].checked = true
+    } else 
+      for (var i = 0; i < tests.length; i++)
+        tests[i].checked = false
   };
 
   // This tells the script to listen for
@@ -41,7 +43,7 @@ var injected = injected || (function(){
   return true;
 })();
 
-function getLastCheckedTest(tests) {
-  for (var i = tests.length - 1; i > 0 && tests[i].checked === false; i--);
+function getCheckedTest(tests) {
+  for (var i = 0; i < tests.length && tests[i].checked === false; i++);
   return i
 }

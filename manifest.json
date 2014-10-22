@@ -13,6 +13,16 @@
     "scripts": ["event.js"],
     "persistent": false
   },
+
+  "commands": {
+    "toggle-auto-check": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Toggle auto check"
+    }
+  },
   
   "permissions": ["http://boston.lti.cs.cmu.edu/classes/11-642/HW/*"]
 }
